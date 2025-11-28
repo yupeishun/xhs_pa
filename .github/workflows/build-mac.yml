@@ -57,6 +57,6 @@ jobs:
     - name: Upload macOS App
       uses: actions/upload-artifact@v4
       with:
-        name: 小红书评论采集器-macOS
-        path: dist/小红书评论采集器.app
+        name: xhs-collector-macos  # 改为英文
+        path: dist/XHS_Collector.app  # 对应上面的修改
         retention-days: 30
