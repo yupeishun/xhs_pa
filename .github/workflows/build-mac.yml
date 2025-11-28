@@ -1,0 +1,62 @@
+name: Build macOS App
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  build-macos-app:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install chromium
+
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --name="小红书评论采集器" \
+          --windowed \
+          --noconfirm \
+          --clean \
+          --onedir \
+          --add-data="ms-playwright:ms-playwright" \
+          --hidden-import=playwright._impl._driver \
+          --hidden-import=playwright.async_api \
+          --hidden-import=tkinter \
+          --hidden-import=PIL._tkinter_finder \
+          --hidden-import=jieba \
+          --hidden-import=pandas \
+          --hidden-import=requests \
+          --hidden-import=asyncio \
+          --hidden-import=logging \
+          --hidden-import=threading \
+          --hidden-import=datetime \
+          --hidden-import=re \
+          --hidden-import=pathlib \
+          --hidden-import=json \
+          --hidden-import=random \
+          --hidden-import=getpass \
+          --hidden-import=uuid \
+          --hidden-import=sys \
+          --hidden-import=os \
+          --hidden-import=time \
+          xhs_sui_final.py
+
+    - name: Upload macOS App
+      uses: actions/upload-artifact@v4
+      with:
+        name: 小红书评论采集器-macOS
+        path: dist/小红书评论采集器.app
+        retention-days: 30
