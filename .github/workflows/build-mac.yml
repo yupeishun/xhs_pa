@@ -8,6 +8,7 @@ on:
 jobs:
   build-macos-app:
     runs-on: macos-latest
+    timeout-minutes: 30
 
     steps:
     - name: Checkout code
@@ -31,7 +32,6 @@ jobs:
           --noconfirm \
           --clean \
           --onedir \
-          --add-data="ms-playwright:ms-playwright" \
           --hidden-import=playwright._impl._driver \
           --hidden-import=playwright.async_api \
           --hidden-import=tkinter \
