@@ -52,7 +52,7 @@ jobs:
           --hidden-import=sys \
           --hidden-import=os \
           --hidden-import=time \
-          xhs_sui_final.py
+          xhs_gui_final.py
 
     - name: Upload macOS App
       uses: actions/upload-artifact@v4
