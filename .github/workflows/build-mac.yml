@@ -27,7 +27,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --name="小红书评论采集器" \
+        pyinstaller --name="XHS_Collector" \
           --windowed \
           --noconfirm \
           --clean \
